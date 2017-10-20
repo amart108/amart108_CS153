@@ -7,7 +7,6 @@
 
 #define N  1000
 
-int p;
 void
 printf(int fd, char *s, ...)
 {
@@ -17,7 +16,7 @@ printf(int fd, char *s, ...)
 void
 forktest(void)
 {
-  int n, pid;
+  int n, pid, st;
 
   printf(1, "fork test\n");
 
@@ -26,26 +25,26 @@ forktest(void)
     if(pid < 0)
       break;
     if(pid == 0)
-      exit(1);
+      exit(0);
   }
-
+  
   if(n == N){
     printf(1, "fork claimed to work N times!\n", N);
-    exit(1);
+    exit(0);
   }
-
+  
   for(; n > 0; n--){
-    if(wait(&p) < 0){
+    if(wait(&st) < 0){
       printf(1, "wait stopped early\n");
       exit(0);
     }
   }
-
-  if(wait(&p) != -1){
+  
+  if(wait(&st) != -1){
     printf(1, "wait got too many\n");
     exit(0);
   }
-
+  
   printf(1, "fork test OK\n");
 }
 
@@ -53,5 +52,5 @@ int
 main(void)
 {
   forktest();
-  exit(1);
+  exit(0);
 }

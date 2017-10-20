@@ -1,10 +1,12 @@
 struct stat;
-struct rtcdate;
 
 // system calls
+// cs 153
 int fork(void);
-int exit(int exitStatus) __attribute__((noreturn));
-int wait(void);
+int exit(int) __attribute__((noreturn)); //m
+int wait(int*); //m
+int waitpid(int, int*, int); //m
+int setprio(int) __attribute__((noreturn)); //m
 int pipe(int*);
 int write(int, void*, int);
 int read(int, void*, int);

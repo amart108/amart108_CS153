@@ -1,5 +1,4 @@
 # Initial process execs /init.
-# This code runs in user space.
 
 #include "syscall.h"
 #include "traps.h"
@@ -14,7 +13,7 @@ start:
   movl $SYS_exec, %eax
   int $T_SYSCALL
 
-# for(;;) exit();
+# for(;;) exit(1);
 exit:
   movl $SYS_exit, %eax
   int $T_SYSCALL
